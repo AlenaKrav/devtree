@@ -10,6 +10,8 @@ export type User = {
     links: string,
 }
 
+export type HandleUser = Pick<User, 'description' | 'image' | 'links' |'handle' | 'name' >
+
 //en este tipo solo seleccionamos algunos atributos de la interfaz anterior
 //aqui añadimos password ya que son datos que usan durante el registro
 export type RegisterForm = Pick<User, 'handle' | 'name' | 'email'> & {

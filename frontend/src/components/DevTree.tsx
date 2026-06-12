@@ -28,6 +28,8 @@ export default function DevTree({ data }: DevTreeProps) {
     setEnabledLinks(userBdEnabledLinks);
   }, [data]);
 
+  console.log(data.handle)
+
 
   const queryClient = useQueryClient();
  
@@ -94,7 +96,7 @@ export default function DevTree({ data }: DevTreeProps) {
           <div className="flex justify-end">
             <Link
               className="font-bold text-right text-slate-800 text-2xl"
-              to={"data.handle"}
+              to={`/${data.handle}`}
               target="_blank"
               rel="noreferrer noopener"
             >

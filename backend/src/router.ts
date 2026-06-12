@@ -2,7 +2,7 @@
 //usa las funciones de handlers/index.ts
 import { Router } from 'express'
 import { body } from 'express-validator'
-import { createAccount, getUser, login, updateProfile, uploadImage } from './handlers'
+import { createAccount, getUser, getUserByHandle, login, updateProfile, uploadImage } from './handlers'
 import { handleInputErrors } from './middleware/validation'
 import { autenticate } from './middleware/auth'
 
@@ -48,6 +48,7 @@ router.patch('/user',
 
 
 router.post('/user/image', autenticate, uploadImage)
+router.get('/:handle', getUserByHandle)
 
 
 export default router
