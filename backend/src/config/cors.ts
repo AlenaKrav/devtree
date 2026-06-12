@@ -10,8 +10,6 @@ export const corsConfig: CorsOptions  = {
             whiteList.push(undefined)
         }
        
-      
-
         if(whiteList.includes(origin)){
             //error - null, true - permitimos la conexion
             callback(null, true)

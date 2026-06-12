@@ -6,7 +6,8 @@ export type User = {
     email: string,
     _id: string,
     description: string,
-    image: string
+    image: string,
+    links: string,
 }
 
 //en este tipo solo seleccionamos algunos atributos de la interfaz anterior

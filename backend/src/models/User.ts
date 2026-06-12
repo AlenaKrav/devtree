@@ -9,7 +9,8 @@ export interface IUser extends Document {
     email: string,
     password: string,
     description: string,
-    image: string
+    image: string,
+    links: string
 }
 
 //está en mongoose no typescritp
@@ -53,6 +54,11 @@ const userSchema = new Schema({
     "image":{
         type: String,
         default: ''
+    },
+
+    "links": {
+        type: String,
+        default: '[]'
     }
 
 })

@@ -3,18 +3,13 @@
 
 import { isAxiosError } from 'axios'
 import api from '../config/axios'
-import type { ProfileForm, User } from '../types'
+import type { User } from '../types'
 
 //obtenemos un token guardado para autenticar al user
 export async function getUser() {
-    const token = localStorage.getItem('AUTH_TOKEN')
     try {
         //atributo data con la respuesta del backend
-        const { data } = await api<User>('/user', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+        const { data } = await api<User>('/user')
         return data
 
 
@@ -26,7 +21,7 @@ export async function getUser() {
 }
 
 //actualizamos el perfil
-export async function updateProfile(formData: ProfileForm) {
+export async function updateProfile(formData: User) {
     try {
         //atributo data con la respuesta del backend
         const { data } = await api.patch<string>('/user', formData)

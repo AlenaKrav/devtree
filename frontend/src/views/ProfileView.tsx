@@ -20,9 +20,6 @@ export default function ProfileView() {
     })
 
 
-
-
-
     //actualizamos el perfil, se usa useMutation ya que en la api hacemos un patch y no lectura
     const updateProfileMutation = useMutation({
         mutationFn: updateProfile,
@@ -63,7 +60,7 @@ export default function ProfileView() {
         }
     })
 
-
+    //No es necesario hacer el submit del formulario para que se actualice la foto, lo hace con ese evento onChange
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(e.target.files){
             uploadImageMutation.mutate(e.target.files[0])
@@ -71,9 +68,17 @@ export default function ProfileView() {
         
     };
 
+    //para aprovechas la misma funcion de actulizacion de perfil y por tanto el mismo endpoint
+    //originalmente desde aqui se enviaban los datos del formulario (handle + description)
     const handleUserProfileForm = (formData: ProfileForm) => {
-        console.log(formData)
-        updateProfileMutation.mutate(formData)
+        //obtenemos la info del user almacenado en el caché
+        //aqui viene el objeto completo CACHEADO
+        const user: User = queryClient.getQueryData(['user'])!;
+        //obtenemos os valores actuales enviado en este momento desde el formulario 
+        user.description = formData.description;
+        user.handle = formData.handle;
+
+        updateProfileMutation.mutate(user)
     }
 
     return (
