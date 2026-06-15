@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import {isAxiosError} from 'axios'
 import { toast } from 'sonner'
@@ -7,12 +7,14 @@ import ErrorMessage from '../components/ErrorMessage'
 import api from '../config/axios'
 
 export default function RegisterView() {
+    const location = useLocation();
+    const navigate = useNavigate();
     
     {/*aqui seteamos como valores iniciales de los campos como cadena vacia*/ }
     const initialValues : RegisterForm = {
         name: '',
         email: '',
-        handle: '',
+        handle: location?.state?.handle || '',
         password: '',
         password_confirmation: ''
     }
@@ -29,7 +31,8 @@ export default function RegisterView() {
             //atributo data con la respuesta del backend
             const {data} = await api.post(`auth/register`, formData)
             toast.success(data)
-            reset()
+            reset();
+            navigate('/auth/login')
             
         } catch (error) {
             if(isAxiosError(error) && error.response){
